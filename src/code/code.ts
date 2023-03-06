@@ -1,0 +1,1 @@
+figma.notify('Plugin running')
