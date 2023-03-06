@@ -1,1 +1,1 @@
-figma.notify('Plugin running')
+figma.notify('Plugin runningss')

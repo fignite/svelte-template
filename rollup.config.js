@@ -6,7 +6,7 @@ import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import replace from '@rollup/plugin-replace';
 import postcss from 'rollup-plugin-postcss';
-import { readFileSync, existsSync } from 'fs'
+import { readFileSync, existsSync, mkdirSync, rm } from 'fs'
 import { globalStyle } from 'svelte-preprocess';
 import strip from '@rollup/plugin-strip';
 import json from '@rollup/plugin-json'
@@ -117,6 +117,10 @@ function createConfigFromManifest(options) {
 			inputs.code = obj.main
 		}
 
+		if (!existsSync(options.dist)) {
+			mkdirSync(options.dist)
+		}
+
 		// Look through inputs
 		var configs = []
 		for (const [key, value] of Object.entries(inputs)) {
@@ -141,12 +145,11 @@ function createConfigFromManifest(options) {
 						}
 					}
 
-					uiConfig.plugins.htmlBundle = htmlBundle({
+					uiConfig.plugins.push(htmlBundle({
 						template: `${options.src}/ui/template.html`,
-						target: `${options.dist}/${value}`,
+						target: `${value}`,
 						inline: true
-					})
-
+					}))
 					configs.push(uiConfig)
 				}
 
