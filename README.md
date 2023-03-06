@@ -8,6 +8,9 @@ It's configured to support a range of things, such as:
 - Support for PostCSS already configured
 - It supports more than one UI file, which is configurable from the `manifest.json` file
 
+
+# Configure
+
 To configure it to suit your project edit the file called `figma.config.js`.
 
 The following options are supported:

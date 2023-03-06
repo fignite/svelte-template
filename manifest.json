@@ -1,106 +1,10 @@
 {
-  "name": "Svelte Template",
-  "id": "885838970710285271",
+  "name": "Figma Svelte Template",
+  "id": "",
   "api": "1.0.0",
   "main": "dist/code.js",
   "ui": {
       "main": "dist/index.html"
   },
-  "permissions": [
-    "currentuser"
-  ],
-  "menu": [
-    {
-      "name": "Create Table",
-      "command": "createTable",
-      "parameters": [
-
-        {
-            "name": "Template",
-            "key": "template",
-            "description": "Choose a template to create tables from"
-        },
-        {
-            "name": "Matrix",
-            "key": "matrix",
-            "description": "Number columns x rows, eg 4x4"
-          },
-          {
-            "name": "Size",
-            "key": "size",
-            "description": "Table size width x height, eg 500xHUG"
-        },
-        {
-            "name": "Cell",
-            "key": "cell",
-            "description": "Cell size width x height, eg 120xFILL",
-            "optional": true
-        },
-        {
-            "name": "Alignment",
-            "key": "alignment",
-            "description": "Vertical alignment of cells",
-            "optional": true
-        },
-        {
-            "name": "Header",
-            "key": "header",
-            "description": "Include header",
-            "optional": true
-        }
-      ],
-      "parameterOnly": false
-    },
-    {
-        "separator": true
-    },
-    {
-        "name": "Switch Axes",
-        "command": "switchColumnsOrRows"
-    },
-    {
-        "name": "Toggle Resizing",
-        "command": "toggleColumnResizing"
-    },
-    {
-        "separator": true
-    },
-    {
-      "name": "Select Column",
-      "command": "selectColumn"
-    },
-    {
-      "name": "Select Row",
-      "command": "selectRow"
-    },
-    {
-        "name": "Insert Column",
-        "command": "insertColumn",
-        "parameters": [
-            {
-                "name": "Position",
-                "key": "position"
-            },
-            {
-                "name": "Number",
-                "key": "number"
-            }
-        ]
-    }
-  ],
-  "relaunchButtons": [
-
-        {"command": "createTable", "name": "Create Table"},
-        {"command": "updateTables", "name": "Refresh Tables"},
-        {"command": "switchColumnsOrRows", "name": "Switch Axes",  "multipleSelection": true},
-        {"command": "toggleColumnResizing", "name": "Toggle Resizing",  "multipleSelection": true},
-
-        {"command": "detachTable", "name": "Detach Table"},
-        {"command": "selectColumn", "name": "Select Column", "multipleSelection": true},
-        {"command": "selectRow", "name": "Select Row", "multipleSelection": true}
-
-    ],
-    "editorType": ["figma"]
-
-
+  "editorType": ["figma", "figjam"]
 }
