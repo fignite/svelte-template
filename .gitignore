@@ -1,5 +1,5 @@
 node_modules/
-dist/
+build/
 public/build/
 src/build
 .DS_Store

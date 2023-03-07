@@ -6,7 +6,7 @@ import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import replace from '@rollup/plugin-replace';
 import postcss from 'rollup-plugin-postcss';
-import { readFileSync, existsSync, mkdirSync, rm } from 'fs'
+import { readFileSync, existsSync, mkdirSync, readdir, unlink } from 'fs'
 import { globalStyle } from 'svelte-preprocess';
 import strip from '@rollup/plugin-strip';
 import json from '@rollup/plugin-json'
@@ -15,6 +15,7 @@ import typescript from 'rollup-plugin-typescript';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import nodePolyfills from 'rollup-plugin-node-polyfills'
 const figmaBuildOptions = require('./figma.config.js')
+import path from 'path'
 
 /* Inline to single html */
 import htmlBundle from 'rollup-plugin-html-bundle';
@@ -63,7 +64,7 @@ function createConfigFromManifest(options) {
 
 			// Watch the `dist` directory and refresh the
 			// browser on changes when not in production
-			!production && livereload('dist'),
+			!production && livereload(options.dest),
 
 			// If we're building for production (npm run build
 			// instead of npm run dev), minify
@@ -76,7 +77,7 @@ function createConfigFromManifest(options) {
 
 	const codeConfig = {
 		output: {
-			file: `${options.dist}/code.js`,
+			file: `${options.dest}/code.js`,
 			format: 'cjs',
 			name: 'code'
 		},
@@ -109,7 +110,7 @@ function createConfigFromManifest(options) {
 
 		var inputs = {}
 
-		if (obj.ui.main) {
+		if (obj.ui) {
 			inputs = { ui: obj.ui }
 		}
 
@@ -117,8 +118,20 @@ function createConfigFromManifest(options) {
 			inputs.code = obj.main
 		}
 
-		if (!existsSync(options.dist)) {
-			mkdirSync(options.dist)
+		if (existsSync(options.dest)) {
+			// If directory exists then delete it's contents
+			readdir(options.dest, (err, files) => {
+				if (err) throw err;
+
+				for (const file of files) {
+					unlink(path.join(options.dest, file), (err) => {
+						if (err) throw err;
+					});
+				}
+			});
+		}
+		else {
+			mkdirSync(options.dest)
 		}
 
 		// Look through inputs
@@ -131,6 +144,7 @@ function createConfigFromManifest(options) {
 				for (const [key, value] of Object.entries(ui)) {
 
 					if (key === "main") {
+						console.log(`src/${key}/${value}`)
 						uiConfig.input = `${options.src}/ui/main.js`
 
 						if (!existsSync(uiConfig.input)) {
@@ -138,7 +152,12 @@ function createConfigFromManifest(options) {
 						}
 					}
 					else {
-						uiConfig.input = `src/${key}/${value}`
+
+						let filename = path.basename(value, '.html')
+
+						console.log(filename)
+
+						uiConfig.input = `${options.src}/ui/${filename}/main.js`
 
 						if (!existsSync(uiConfig.input)) {
 							throw (`${uiConfig.input} doesn't exist`)

@@ -2,9 +2,9 @@
   "name": "Figma Svelte Template",
   "id": "",
   "api": "1.0.0",
-  "main": "dist/code.js",
+  "main": "build/code.js",
   "ui": {
-      "main": "dist/index.html"
+      "main": "build/index.html"
   },
   "editorType": ["figma", "figjam"]
 }
