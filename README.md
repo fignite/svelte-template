@@ -13,6 +13,8 @@ It's configured to support a range of things, such as:
 
 Duplicate this repo by either forking it or cloning it.
 
+Then run `npm install` to install the modules.
+
 Then run `npm run build` to build the plugin or widget files.
 
 ## Config
