@@ -3,8 +3,6 @@
   "id": "",
   "api": "1.0.0",
   "main": "build/code.js",
-  "ui": {
-      "main": "build/index.html"
-  },
+  "ui": "build/index.html",
   "editorType": ["figma", "figjam"]
 }

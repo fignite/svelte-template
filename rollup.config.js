@@ -110,7 +110,15 @@ function createConfigFromManifest(options) {
 
 		var inputs = {}
 
-		if (obj.ui) {
+		if (typeof obj.ui === 'string' || obj.ui instanceof String) {
+			// If it's just a string then, give it a key of html. We do this because this is a single view
+			inputs = {
+				ui: {
+					html: obj.ui
+				}
+			}
+		}
+		else {
 			inputs = { ui: obj.ui }
 		}
 
@@ -143,25 +151,27 @@ function createConfigFromManifest(options) {
 
 				for (const [key, value] of Object.entries(ui)) {
 
-					if (key === "main") {
+					if (key === "html") {
 						console.log(`src/${key}/${value}`)
 						uiConfig.input = `${options.src}/ui/main.js`
 
 						if (!existsSync(uiConfig.input)) {
-							throw (`${uiConfig.input} File doesn't exist`)
+							throw (`${uiConfig.input} doesn't exist`)
 						}
 					}
 					else {
 
-						let filename = path.basename(value, '.html')
+						let filename = path.basename(value)
+						let extname = path.extname(filename)
 
-						console.log(filename)
+						if (extname.toLocaleLowerCase() === ".html") {
+							uiConfig.input = `${options.src}/ui/${key}/main.js`
 
-						uiConfig.input = `${options.src}/ui/${filename}/main.js`
-
-						if (!existsSync(uiConfig.input)) {
-							throw (`${uiConfig.input} doesn't exist`)
+							if (!existsSync(uiConfig.input)) {
+								throw (`${uiConfig.input} doesn't exist`)
+							}
 						}
+
 					}
 
 					uiConfig.plugins.push(htmlBundle({

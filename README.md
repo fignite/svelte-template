@@ -27,19 +27,18 @@ The following options are supported:
 {
     manifest: "manifest.json", // Optional. The path to the plugin or widget's manifest file
     src: "src", // The path to the ui and main source code. By default the template looks for ui code inside `/ui` and code inside `/code`.
-    dest: "build", // The path where you would like the compiled files to be created (this must match what's in your manifest),
+    dest: "build", // The path where you would like the compiled files to be created (this must match what's in your manifest). Warning: this folder get's deleted,
     code: true, // Optional. Specify false if you don't want Svelte to bundle the main code. Useful if you want to use another bundler for this
 }
 ```
 
 ## File structure
 
-- `src` This contains both `UI` and `Code` source code. See below for help on use with multiple UI files
-- `dest` The destination you want the files to be written to.
+- `src` This contains both `UI` and `Code` source code. See below for help on use with multiple UI files.
 
 ## Multiple UI files
 
-To support UI files do the following:
+To support UI files add a separate key for each UI file.
 
 1. Edit your manifest file to point to what will be the final compiled UI files
     ```jsonc
