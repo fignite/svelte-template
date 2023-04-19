@@ -11,15 +11,28 @@ It's configured to support a range of things, such as:
 
 # Getting Started
 
-Duplicate this repo by either forking it or cloning it.
+Create a new plugin or widget based on this template using [degit](https://github.com/Rich-Harris/degit).
 
-Then run `npm install` to install the modules.
+```bash
+npx degit fignite/svelte-template my-plugin
+cd my-plugin
+```
 
-Then run `npm run build` to build the plugin or widget files.
+Then install the dependencies.
 
-## Config
+```bash
+npm install
+```
 
-To configure it to suit your project edit the file called `figma.config.js`.
+Then watch for changes while developing...
+
+```bash
+npm run dev
+```
+
+# Configure
+
+To configure it to suit your project, edit the file called `figma.config.js`.
 
 The following options are supported:
 
@@ -65,3 +78,11 @@ To support UI files add a separate key for each UI file.
                     App.svelte
                     main.js
     ```
+
+## To build
+
+To optimise for publishing your plugin...
+
+```bash
+npm run build
+```
