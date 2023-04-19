@@ -6,13 +6,9 @@ module.exports = {
 		// 'postcss-custom-selectors': {},
 		// 'postcss-short': {},
 		// 'postcss-nested': {},
-		'postcss-logical': {},
-		'flex-gap-polyfill': {}
 		// 'postcss-proportional-spacing': {},
 		// 'postcss-pow': {}
 		// 'autoprefixer': {}
-		// require('autoprefixer')
-		// 'postcss-extend-rule': {},
 		// 'postcss-flexbugs-fixes': {},
 		// 'postcss-preset-env': {
 		//     autoprefixer: {
